@@ -1,0 +1,32 @@
+#version: '3.6'
+services:
+  # MySQL
+  db:
+    image: mysql:8.0
+    container_name: ms-mysql-service-svc
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpw
+      MYSQL_DATABASE: database_store
+      MYSQL_USER: user_store
+      MYSQL_PASSWORD: password_store
+    #networks:
+      #- onlinestore
+      # persiste los datos
+    volumes:
+      - mysqldata:/var/lib/mysql
+#networks:
+  #onlinestore:
+    #external: true
+volumes:
+  mysqldata:
+    external: true
+
+#https://youtu.be/-U9AeEu7mwI?t=338
+# crear volumen mysqldata
+# docker volume create --name=mysqldata
+## validar que este levantado docker-registry
+## validar que la imagen de mysql este dentro de docker registry
+# docker-compose -f docker-compose-mysql.yml up -d
